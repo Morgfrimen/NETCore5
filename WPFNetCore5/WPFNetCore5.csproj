@@ -1,0 +1,30 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>netcoreapp5.0</TargetFramework>
+	  <PublishTrimmed>true</PublishTrimmed>
+	  <!--<PublishReadyToRun>true</PublishReadyToRun>-->
+	  <PublishSingleFile>true</PublishSingleFile>
+	  <RuntimeIdentifier>win-x86</RuntimeIdentifier>
+	  <!--<PublishReadyToRunShowWarnings>true</PublishReadyToRunShowWarnings>-->
+	  <!--<Platforms>Any CPU</Platforms>-->
+	  <UseWPF>true</UseWPF>
+	  <StartupObject>WPFNetCore5.App</StartupObject>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <Prefer32Bit>false</Prefer32Bit>
+    <PlatformTarget>x86</PlatformTarget>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Folder Include="ViewModels\" />
+    <Folder Include="Models\" />
+  </ItemGroup>
+
+</Project>
