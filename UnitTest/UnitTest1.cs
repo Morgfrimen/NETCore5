@@ -1,3 +1,4 @@
+using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 using „исленныећетоды;
@@ -47,7 +48,16 @@ namespace UnitTest
         [TestMethod]
         public void TestSimplex()
         {
-            
+            double[,] A = new double[,]
+            {
+                {0,1,1,1,0,0 },
+                {2,1,2,0,1,0 },
+                {2,-1,2,0,0,1}
+            };
+            double[] B = new double[] {0, 0, 0,-4,-6,-2};
+            double[] Z = new double[] {3,2,1,0,0,0};
+
+            LinearProgram.GetDoubleSimplex(A, B, Z);
         }
     }
 
