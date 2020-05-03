@@ -16,7 +16,7 @@ namespace ЧисленныеМетоды
         private DoubleSimplexMethod (double[,] A , double[] B , double[] Z)
         {
             this.A = A;
-            this.bazis = new double[A.GetLength(1)];
+            this.bazis = new double[A.GetLength(0)];
             //ToDo: составляем сразу целевую функцию
             this.B = B;
             base.BuldMatrix(A,B);
@@ -25,6 +25,7 @@ namespace ЧисленныеМетоды
 
         private void KanonFormA()
         {
+            double[] vs = new double[A.GetLength(1)];
             for (int columnIndex = 0; columnIndex < A.GetLength(1); columnIndex++)
             {
                 int countBaz = 0;
@@ -35,9 +36,11 @@ namespace ЧисленныеМетоды
                 }
 
                 if (countBaz == 1)
-                    this.bazis[columnIndex] = columnIndex + 1;
+                    vs[columnIndex] = columnIndex + 1;
 
             }
+
+            this.bazis = vs.Where(val => Math.Abs(val) > 0).ToArray();
         }
 
 
