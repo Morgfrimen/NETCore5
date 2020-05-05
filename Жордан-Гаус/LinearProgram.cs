@@ -9,15 +9,15 @@
             return jourdan;
         }
 
-        public static ILinearAlgoritm GetJourdanGayssLinearAlgoritm(double[,] a,double[] b)
+        public static ILinearAlgoritm GetJourdanGayssLinearAlgoritm (double[,] a , double[] b)
         {
-            ILinearAlgoritm jourdan = JordanGayss.GetInstance(a,b);
+            ILinearAlgoritm jourdan = JordanGayss.GetInstance(a: a , b: b);
             return jourdan;
         }
 
-        public static ILinearAlgoritm GetDoubleSimplex(double[,] A,double[] B,double[] Z)
+        public static ILinearAlgoritm GetDoubleSimplex (double[,] A , double[] B , double[] Z)
         {
-            ILinearAlgoritm simplexAlgoritm = DoubleSimplexMethod.GetInstance(A,B,Z);
+            ILinearAlgoritm simplexAlgoritm = DoubleSimplexMethod.GetInstance(A: A , B: B , Z: Z);
             return simplexAlgoritm;
         }
     }

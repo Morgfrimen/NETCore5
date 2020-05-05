@@ -6,8 +6,9 @@ namespace ЧисленныеМетоды
     public interface ILinearAlgoritm
     {
         public double[,] A { get; set; }
-        public double[] B { get; set; } 
-        
+
+        public double[] B { get; set; }
+
         public double[,] Value { get; set; }
 
         public double Delta { get; set; }
@@ -34,20 +35,20 @@ namespace ЧисленныеМетоды
         /// <inheritdoc />
         public virtual void Run()
         {
-            if(this.A is null || this.B is null)
-                throw new Exception($"A={null} или B{null}");
+            if (this.A is null || this.B is null)
+                throw new Exception(message: $"A={null} или B{null}");
         }
 
         protected void SaveAB()
         {
             double[] B = new double[this.Value.GetLength(dimension: 0)];
             for (int rowIndex = 0; rowIndex < B.Length; rowIndex++)
-                B[rowIndex] = this.Value[rowIndex, this.Value.GetLength(dimension: 1) - 1];
-            double[,] A = new double[this.Value.GetLength(dimension: 0), this.Value.GetLength(dimension: 1) - 1];
+                B[rowIndex] = this.Value[rowIndex , this.Value.GetLength(dimension: 1) - 1];
+            double[,] A = new double[this.Value.GetLength(dimension: 0) , this.Value.GetLength(dimension: 1) - 1];
             for (int rowIndex = 0; rowIndex < A.GetLength(dimension: 0); rowIndex++)
             {
                 for (int columIndex = 0; columIndex < A.GetLength(dimension: 1); columIndex++)
-                    A[rowIndex, columIndex] = this.Value[rowIndex, columIndex];
+                    A[rowIndex , columIndex] = this.Value[rowIndex , columIndex];
             }
 
             this.A = A;
@@ -59,21 +60,22 @@ namespace ЧисленныеМетоды
         /// </summary>
         /// <param name="A">матрица</param>
         /// <param name="B">элементы</param>
-        protected void BuldMatrixRight(double[,] A, double[] B)
+        protected void BuldMatrixRight (double[,] A , double[] B)
         {
 
-            double[,] value = new double[A.GetLength(dimension: 0), A.GetLength(dimension: 1) + 1];
+            double[,] value = new double[A.GetLength(dimension: 0) , A.GetLength(dimension: 1) + 1];
             for (int rowIndex = 0; rowIndex < value.GetLength(dimension: 0); rowIndex++)
             {
                 for (int columnIndex = 0; columnIndex < value.GetLength(dimension: 1); columnIndex++)
                 {
                     if ((value.GetLength(dimension: 1) - 1) == columnIndex)
-                        value[rowIndex, columnIndex] = B[rowIndex];
+                        value[rowIndex , columnIndex] = B[rowIndex];
                     else
-                        value[rowIndex, columnIndex] = A[rowIndex, columnIndex];
+                        value[rowIndex , columnIndex] = A[rowIndex , columnIndex];
                 }
             }
-            Value = value;
+
+            this.Value = value;
             this.SaveAB();
         }
 
@@ -84,16 +86,13 @@ namespace ЧисленныеМетоды
         /// <param name="Z">элементы</param>
         protected void BuldMatrixDown (double[,] value , double[] Z)
         {
-            double[,] newValue = new double[value.GetLength(0)+1,value.GetLength(1)];
-            double[] newZ = new double[value.GetLength(1)];
+            double[,] newValue = new double[value.GetLength(dimension: 0) + 1 , value.GetLength(dimension: 1)];
+            double[] newZ = new double[value.GetLength(dimension: 1)];
 
-            Extension<double>.CopyArray(this.Value,ref newValue);
-            Array.Copy(Z,newZ,Z.Length);
-            for (int columnIndex = 0; columnIndex < newValue.GetLength(1); columnIndex++)
-            {
-                newValue[newValue.GetLength(0) - 1 , columnIndex] = newZ[columnIndex];
-            }
-
+            Extension<double>.CopyArray(oldMatrix: this.Value , newMatrix: ref newValue);
+            Array.Copy(sourceArray: Z , destinationArray: newZ , length: Z.Length);
+            for (int columnIndex = 0; columnIndex < newValue.GetLength(dimension: 1); columnIndex++)
+                newValue[newValue.GetLength(dimension: 0) - 1 , columnIndex] = newZ[columnIndex];
             this.Value = newValue;
         }
     }

@@ -1,17 +1,16 @@
 ﻿using System;
-using System.Diagnostics;
 
 namespace ЧисленныеМетоды
 {
 
-    internal class JordanGayss : LinearAlgoritm
+    internal class JordanGayss: LinearAlgoritm
     {
         private double[,] _aFirstVid;
         private double[] _bFirstVid;
 
         private static JordanGayss _instance;
 
-        private JordanGayss (double[,] a , double[] b, double delta = DeltaDefault)
+        private JordanGayss (double[,] a , double[] b , double delta = DeltaDefault)
         {
             A = a;
             B = b;
@@ -75,13 +74,13 @@ namespace ЧисленныеМетоды
             base.Run();
             this._aFirstVid = A;
             this._bFirstVid = B;
-            BuldMatrixRight(A: A,B: B);
+            BuldMatrixRight(A: A , B: B);
             for (int index = 0; index < Value.GetLength(dimension: 0); index++)
                 Value = this.Step(value: Value , rowStart: index , columnStart: index);
             SaveAB();
             if (!this.IsValitResult())
                 throw new Exception(message: $"{nameof(JordanGayss)}.{nameof(this.IsValitResult)} : return {this.IsValitResult()}");
-            
+
         }
 
         private bool IsValitResult()
@@ -92,7 +91,7 @@ namespace ЧисленныеМетоды
                 double result = 0;
                 for (int colIndex = 0; colIndex < A.GetLength(dimension: 1); colIndex++)
                     result += this._aFirstVid[rowIndex , colIndex] * B[colIndex];
-                if ((this._bFirstVid[rowIndex] >= (result - this.Delta)) && (this._bFirstVid[rowIndex] <= (result + this.Delta)))
+                if ((this._bFirstVid[rowIndex] >= (result - Delta)) && (this._bFirstVid[rowIndex] <= (result + Delta)))
                 {
                     validresult = true;
                 }
@@ -101,7 +100,7 @@ namespace ЧисленныеМетоды
                     validresult = false;
                     break;
                 }
-                    
+
             }
 
             return validresult;
