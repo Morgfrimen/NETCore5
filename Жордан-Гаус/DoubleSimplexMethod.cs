@@ -16,12 +16,11 @@ namespace ЧисленныеМетоды
         private DoubleSimplexMethod (double[,] A , double[] B , double[] Z)
         {
             this.A = A;
-
-            //ToDo: составляем сразу целевую функцию
-            this.KanonFormA();
             this.B = B;
-            BuldMatrixRight(A: this.A , B: this.B);
             this._z = Z;
+
+            this.KanonFormA();
+            BuldMatrixRight(A: this.A , B: this.B);
             BuldMatrixDown(value: Value , Z: this._z);
 
         }
