@@ -54,7 +54,12 @@ namespace ЧисленныеМетоды
             this.B = B;
         }
 
-        protected void BuldMatrix(double[,] A, double[] B)
+        /// <summary>
+        /// Добавляет элементы справа матрицы
+        /// </summary>
+        /// <param name="A">матрица</param>
+        /// <param name="B">элементы</param>
+        protected void BuldMatrixRight(double[,] A, double[] B)
         {
 
             double[,] value = new double[A.GetLength(dimension: 0), A.GetLength(dimension: 1) + 1];
@@ -70,6 +75,26 @@ namespace ЧисленныеМетоды
             }
             Value = value;
             this.SaveAB();
+        }
+
+        /// <summary>
+        /// Добавляет элементы снизу матрицы
+        /// </summary>
+        /// <param name="value">матрица</param>
+        /// <param name="Z">элементы</param>
+        protected void BuldMatrixDown (double[,] value , double[] Z)
+        {
+            double[,] newValue = new double[value.GetLength(0)+1,value.GetLength(1)];
+            double[] newZ = new double[value.GetLength(1)];
+
+            Extension<double>.CopyArray(this.Value,ref newValue);
+            Array.Copy(Z,newZ,Z.Length);
+            for (int columnIndex = 0; columnIndex < newValue.GetLength(1); columnIndex++)
+            {
+                newValue[newValue.GetLength(0) - 1 , columnIndex] = newZ[columnIndex];
+            }
+
+            this.Value = newValue;
         }
     }
 

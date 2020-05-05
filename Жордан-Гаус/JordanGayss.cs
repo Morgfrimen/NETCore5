@@ -18,7 +18,7 @@ namespace ЧисленныеМетоды
             this._aFirstVid = A;
             this._bFirstVid = B;
             Delta = delta;
-            BuldMatrix(A: A , B: B);
+            BuldMatrixRight(A: A , B: B);
         }
 
         private JordanGayss() { }
@@ -66,7 +66,7 @@ namespace ЧисленныеМетоды
 
         internal double[,] Step (double[,] A , double[] B , int rowStart , int columStart)
         {
-            BuldMatrix(A: A , B: B);
+            BuldMatrixRight(A: A , B: B);
             return this.Step(value: Value , rowStart: rowStart , columnStart: columStart);
         }
 
@@ -75,7 +75,7 @@ namespace ЧисленныеМетоды
             base.Run();
             this._aFirstVid = A;
             this._bFirstVid = B;
-            BuldMatrix(A: A,B: B);
+            BuldMatrixRight(A: A,B: B);
             for (int index = 0; index < Value.GetLength(dimension: 0); index++)
                 Value = this.Step(value: Value , rowStart: index , columnStart: index);
             SaveAB();

@@ -53,9 +53,12 @@ namespace UnitTest
                 {0,1,1,1,0,0 },
                 {2,1,2,0,1,0 },
                 {2,-1,2,0,0,1}
+                //{0,1,1 },
+                //{2,1,2 },
+                //{0,-1,2}
             };
-            double[] B = new double[] {0, 0, 0,-4,-6,-2};
-            double[] Z = new double[] {3,2,1,0,0,0};
+            double[] B = new double[] {0, 0, 0, -4, -6, -2 };
+            double[] Z = new double[] {3,2,1, 0, 0, 0 };
 
             LinearProgram.GetDoubleSimplex(A, B, Z);
         }
