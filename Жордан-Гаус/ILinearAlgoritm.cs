@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace ЧисленныеМетоды
 {
@@ -60,16 +62,25 @@ namespace ЧисленныеМетоды
         /// </summary>
         /// <param name="A">матрица</param>
         /// <param name="B">элементы</param>
-        protected void BuldMatrixRight (double[,] A , double[] B)
+        protected void BuldMatrixRight (double[,] A , double[] B , List<int> columnBaz = null)
         {
-
             double[,] value = new double[A.GetLength(dimension: 0) , A.GetLength(dimension: 1) + 1];
             for (int rowIndex = 0; rowIndex < value.GetLength(dimension: 0); rowIndex++)
             {
                 for (int columnIndex = 0; columnIndex < value.GetLength(dimension: 1); columnIndex++)
                 {
                     if ((value.GetLength(dimension: 1) - 1) == columnIndex)
-                        value[rowIndex , columnIndex] = B[rowIndex];
+                    {
+                        if((columnBaz.Max() + 1) == B.Length)
+                            value[rowIndex, columnIndex] = columnBaz is null ? B[rowIndex] : B[columnBaz[rowIndex]];
+                        else
+                        {
+                            double[] newB = new double[columnBaz.Max() + 1];
+                            Array.Copy(B,0,newB,B.Length,B.Length);
+                            value[rowIndex, columnIndex] = columnBaz is null ? newB[rowIndex] : newB[columnBaz[rowIndex]];
+                        }
+                    }
+                        
                     else
                         value[rowIndex , columnIndex] = A[rowIndex , columnIndex];
                 }
